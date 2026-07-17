@@ -60,3 +60,38 @@ WHERE faculty_id = 5;
 SELECT *
 FROM Faculty
 WHERE department = 'Mathematics';
+-- ================================
+-- Member E: Extra_Curricular_Activities Table
+-- ================================
+
+-- CREATE TABLE
+CREATE TABLE Extra_Curricular_Activities (
+    activity_id INT PRIMARY KEY,
+    activity_name VARCHAR(100),
+    category VARCHAR(50),
+    faculty_advisor_id INT,
+    FOREIGN KEY (faculty_advisor_id) REFERENCES Faculty(faculty_id)
+);
+
+-- INSERT 5 sample rows
+INSERT INTO Extra_Curricular_Activities (activity_id, activity_name, category, faculty_advisor_id)
+VALUES
+(1, 'Football Club', 'Sports', 1),
+(2, 'Debate Club', 'Academic', 2),
+(3, 'Coding Club', 'Technology', 3),
+(4, 'Drama Club', 'Arts', 4),
+(5, 'Music Club', 'Arts', 1);
+
+-- UPDATE statement
+UPDATE Extra_Curricular_Activities
+SET category = 'STEM'
+WHERE activity_id = 3;
+
+-- DELETE statement
+DELETE FROM Extra_Curricular_Activities
+WHERE activity_id = 5;
+
+-- SELECT statement
+SELECT *
+FROM Extra_Curricular_Activities
+WHERE category = 'Sports';
