@@ -4,7 +4,13 @@ CREATE TABLE Student_Courses (
     PRIMARY KEY (student_id, course_id),
     FOREIGN KEY (student_id) REFERENCES Students(student_id),
     FOREIGN KEY (course_id) REFERENCES Courses(course_id)
-);	
+);
+INSERT INTO Studnet_Courses (student_id, course_id, enrollment_date) VALUES
+(1, 1, '2025-09-01'),
+(1, 2, '2025-09-01'),
+(2, 1, '2025-09-02'),
+(3, 3, '2025-09-01'),
+(4, 2, '2025-09-03');
 -==================================
 --GRP TASK 1: 3 join QUERIES
 -==================================
@@ -149,4 +155,4 @@ WHERE activity_id = 5;
 SELECT *
 FROM Extra_Curricular_Activities
 WHERE category = 'Sports';
->>>>>>> main
+>>>>>>> main:
