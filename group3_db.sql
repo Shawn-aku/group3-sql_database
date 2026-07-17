@@ -86,9 +86,45 @@ DELETE FROM Students WHERE student_id = 5;
 
 -- 6: SELECT with WHERE
 SELECT * FROM Students WHERE classroom_id = 1;
+
+--=================================
+--Memeber B :Classroom Table
+--=================================
+
+--1. creating a table
+
+CREATE TABLE Classroom (
+    classroom_id INT AUTO_INCREMENT PRIMARY KEY,
+    room_number VARCHAR(10),
+    building VARCHAR(50),
+    capacity INT
+);
+--2.Inserting values
+INSERT INTO Classroom (room_number, building, capacity) VALUES
+('101', 'Main Block', 30),
+('102', 'Main Block', 25),
+('201', 'Science Wing', 40),
+('202', 'Science Wing', 35),
+('301', 'Engineering Block', 50);
+
+-- 3. increasing the capacity of room 101
+UPDATE Classroom
+SET capacity = 32
+WHERE room_number = '101';
+
+-- 4.remove a classroom no longer in use
+DELETE FROM Classroom
+WHERE classroom_id = 5;
+
+-- 5. find classrooms with capacity over 30
+SELECT *
+FROM Classroom
+WHERE capacity > 30;
+
+
 -- ================================
 -- Member C: Faculty Table
--- ================================
+-- ===============================
 
 -- CREATE TABLE
 CREATE TABLE Faculty (
