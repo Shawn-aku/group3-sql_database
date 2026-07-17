@@ -156,3 +156,51 @@ SELECT *
 FROM Extra_Curricular_Activities
 WHERE category = 'Sports';
 >>>>>>> main:
+-- ================================================
+-- Member E: Student_Activities Table (Junction)
+-- ================================================
+
+-- This table links students to the extracurricular activities they join.
+-- The combination of student_id and activity_id forms a composite primary key,
+-- because a student can join many activities and an activity can have many students.
+
+CREATE TABLE Student_Activities (
+    student_id INT,
+    activity_id INT,
+    join_date DATE,                -- when the student joined the activity
+    role VARCHAR(50),              -- e.g., Captain, Treasurer, Member
+    PRIMARY KEY (student_id, activity_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    FOREIGN KEY (activity_id) REFERENCES Extra_Curricular_Activities(activity_id)
+);
+
+-- Adding at least five sample participations.
+-- Using student_ids 1 to 4 (from Member A) and activity_ids 1 to 4 (from Extra_Curricular table).
+-- Student 1 appears twice to show that one student can be in multiple activities.
+
+INSERT INTO Student_Activities (student_id, activity_id, join_date, role)
+VALUES
+(1, 1, '2026-02-01', 'Team Captain'),
+(2, 2, '2026-02-02', 'Member'),
+(3, 3, '2026-02-03', 'Secretary'),
+(4, 4, '2026-02-04', 'Treasurer'),
+(1, 2, '2026-02-05', 'Member');   -- Student 1 also in Debate Club
+
+-- Updating one record: promoting Student 1 to Co-Captain for Football Club (activity_id = 1).
+
+UPDATE Student_Activities
+SET role = 'Co-Captain'
+WHERE student_id = 1 AND activity_id = 1;
+
+-- Deleting one participation: Student 4 drops out of Drama Club (activity_id = 4).
+
+DELETE FROM Student_Activities
+WHERE student_id = 4 AND activity_id = 4;
+
+-- Finally, a simple SELECT to list all activities that Student 1 is involved in.
+-- This helps verify that the update and delete worked as expected.
+
+SELECT *
+FROM Student_Activities
+WHERE student_id = 1;
+
