@@ -1,12 +1,11 @@
 -- =========================================================
--- Member D — Courses table
--- Depends on: Faculty (Member C), Classroom (Member B)
--- Run this AFTER Faculty and Classroom tables exist and have data.
+-- Desire De Dieu Manzi  Jabo Member D — Courses table
+
 -- =========================================================
 
 USE alu_db;
 
--- 1. CREATE TABLE with PK + FKs
+-- 1. CREATE TABLE 
 CREATE TABLE Courses (
     course_id     INT AUTO_INCREMENT PRIMARY KEY,
     course_name   VARCHAR(100) NOT NULL,
@@ -18,11 +17,6 @@ CREATE TABLE Courses (
 );
 
 -- 2. INSERT sample rows
--- IMPORTANT: before running these, check the real IDs in your
--- teammates' tables — don't guess:
---   SELECT * FROM Faculty;
---   SELECT * FROM Classroom;
--- Then swap the faculty_id / classroom_id values below to match.
 
 INSERT INTO Courses (course_name, credits, faculty_id, classroom_id)
 VALUES ('Introduction to Databases', 3, 1, 1);
