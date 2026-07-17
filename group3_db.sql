@@ -1,4 +1,5 @@
-CREATE DATABASE ALU_GP3_DATABASE
+CREATE DATABASE ALU_GP3_DATABASE;
+USE ALU_GP3_DATABASE;
 -- ================================
 -- Member A: Students Table
 -- ================================
