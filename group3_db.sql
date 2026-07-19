@@ -1,7 +1,16 @@
 CREATE DATABASE ALU_GP3_DATABASE;
 USE ALU_GP3_DATABASE;
---================================
---CREATING THE TABLES
+-- ================================
+-- CREATING THE TABLES
+-- =================================
+-- Member B :Classroom Table
+-- =================================
+CREATE TABLE Classroom (
+    classroom_id INT AUTO_INCREMENT PRIMARY KEY,
+    room_number VARCHAR(10),
+    building VARCHAR(50),
+    capacity INT
+);
 -- ================================
 -- Member A: Students Table
 -- ================================
@@ -14,15 +23,7 @@ CREATE TABLE Students (
     FOREIGN KEY (classroom_id) REFERENCES Classroom(classroom_id)
 );
 
---=================================
---Memeber B :Classroom Table
---=================================
-CREATE TABLE Classroom (
-    classroom_id INT AUTO_INCREMENT PRIMARY KEY,
-    room_number VARCHAR(10),
-    building VARCHAR(50),
-    capacity INT
-);
+
 -- ================================
 -- Member C: Faculty Table
 -- ===============================
@@ -33,9 +34,9 @@ CREATE TABLE Faculty (
     department VARCHAR(50)
 );
 
---============================
---Member D:course Table
---============================
+-- ============================
+-- Member D:course Table
+-- ============================
 CREATE TABLE Courses (
     course_id     INT AUTO_INCREMENT PRIMARY KEY,
     course_name   VARCHAR(100) NOT NULL,
@@ -58,9 +59,16 @@ CREATE TABLE Extra_Curricular_Activities (
     FOREIGN KEY (faculty_advisor_id) REFERENCES Faculty(faculty_id)
 );
 
---=====================================
---ALL THE INSERT TABLES
---====================================
+-- =====================================
+-- ALL THE INSERT TABLES
+-- ====================================
+-- Insert member B
+INSERT INTO Classroom (room_number, building, capacity) VALUES
+('101', 'Main Block', 30),
+('102', 'Main Block', 25),
+('201', 'Science Wing', 40),
+('202', 'Science Wing', 35),
+('301', 'Engineering Block', 50);
 
 -- Insert member A
 INSERT INTO Students VALUES (1, 'Shawn Dark', 'shawn@alu.edu', 1, '2024-09-01');
@@ -69,14 +77,7 @@ INSERT INTO Students VALUES (3, 'Kofi Mesiah', 'kofi@alu.edu', 2, '2024-09-02');
 INSERT INTO Students VALUES (4, 'Fatima Nkosi', 'fatima@alu.edu', 2, '2024-09-03');
 INSERT INTO Students VALUES (5, 'Kyleeh shiga', 'kyleeh@alu.edu', 3, '2024-09-04');
 
---Insert member B
-INSERT INTO Classroom (room_number, building, capacity) VALUES
-('101', 'Main Block', 30),
-('102', 'Main Block', 25),
-('201', 'Science Wing', 40),
-('202', 'Science Wing', 35),
-('301', 'Engineering Block', 50);
---Insert member C 
+-- Insert member C 
 INSERT INTO Faculty (faculty_id, name, email, department)
 VALUES
 (1, 'John Smith', 'john.smith@alu.edu', 'Computer Science'),
@@ -85,7 +86,7 @@ VALUES
 (4, 'Sarah Wilson', 'sarah.wilson@alu.edu', 'Engineering'),
 (5, 'Grace Niyonzima', 'grace.niyonzima@alu.edu', 'Information Systems');
 
---Insert member D
+-- Insert member D
 INSERT INTO Courses (course_name, credits, faculty_id, classroom_id)
 VALUES ('Introduction to Databases', 3, 1, 1);
 
@@ -101,7 +102,7 @@ VALUES ('Operating Systems', 4, 4, 1);
 INSERT INTO Courses (course_name, credits, faculty_id, classroom_id)
 VALUES ('Computer Networks', 3, 5, 2);
 
---Insert member E
+-- Insert member E
 INSERT INTO Extra_Curricular_Activities (activity_id, activity_name, category, faculty_advisor_id)
 VALUES
 (1, 'Football Club', 'Sports', 1),
@@ -110,10 +111,10 @@ VALUES
 (4, 'Drama Club', 'Arts', 4),
 (5, 'Music Club', 'Arts', 1);
 
---=====================================
+-- =====================================
 -- ALL UPDATE, DLETE AND SELECT QUERIES
---=====================================
---Update member A
+-- =====================================
+-- Update member A
 -- 1: UPDATE and DELETE
 UPDATE Students SET email = 'shawn.dark@alu.edu' WHERE student_id = 1;
 DELETE FROM Students WHERE student_id = 5;
@@ -122,7 +123,7 @@ DELETE FROM Students WHERE student_id = 5;
 SELECT * FROM Students WHERE classroom_id = 1;
 
 
---Update member B 
+-- Update member B 
 -- 1. increasing the capacity of room 101
 UPDATE Classroom
 SET capacity = 32
@@ -137,22 +138,22 @@ SELECT *
 FROM Classroom
 WHERE capacity > 30;
 
---Update member c 
---1.update statement
+-- Update member c 
+-- 1.update statement
 UPDATE Faculty
 SET department = 'Software Engineering'
 WHERE faculty_id = 1;
 
---2. DELETE statement
+-- 2. DELETE statement
 DELETE FROM Faculty
 WHERE faculty_id = 5;
 
---3. SELECT statement
+-- 3. SELECT statement
 SELECT *
 FROM Faculty
 WHERE department = 'Mathematics';
 
---Update member D
+-- Update member D
 -- 1. UPDATE
 UPDATE Courses
 SET credits = 4
@@ -167,7 +168,7 @@ SELECT *
 FROM Courses
 WHERE credits >= 4;
 
---Update member E
+-- Update member E
 -- 1.UPDATE statement
 UPDATE Extra_Curricular_Activities
 SET category = 'STEM'
@@ -186,9 +187,9 @@ WHERE category = 'Sports';
 -- =================================================================
 -- Member E: JOINING TABLES AND THE THREE QUERIES AND AGGREGATED ONE
 -- =================================================================
---=======================================================
---GRP TASK 0: CREATING THE STUDENT_COURSE AND _ACTIVITIES
---=======================================================
+-- =======================================================
+-- GRP TASK 0: CREATING THE STUDENT_COURSE AND _ACTIVITIES
+-- =======================================================
 
 -- This table links students to the extracurricular activities they join.
 -- The combination of student_id and activity_id forms a composite primary key,
@@ -212,8 +213,8 @@ CREATE TABLE Student_Courses (
     FOREIGN KEY (course_id) REFERENCES Courses(course_id)
 );
 
---INSERTING IN TABLES
---insert in activities
+-- INSERTING IN TABLES
+-- Insert in activities
 INSERT INTO Student_Activities (student_id, activity_id, join_date, role)
 VALUES
 (1, 1, '2026-02-01', 'Team Captain'),
@@ -221,17 +222,17 @@ VALUES
 (3, 3, '2026-02-03', 'Secretary'),
 (4, 4, '2026-02-04', 'Treasurer'),
 (1, 2, '2026-02-05', 'Member');
---insert in courses
-INSERT INTO Studnet_Courses (student_id, course_id, enrollment_date) VALUES
+-- insert in courses
+INSERT INTO Student_Courses (student_id, course_id, enrollment_date) VALUES
 (1, 1, '2025-09-01'),
 (1, 2, '2025-09-01'),
 (2, 1, '2025-09-02'),
 (3, 3, '2025-09-01'),
 (4, 2, '2025-09-03');
 
--==================================
---GRP TASK 1: 3 join QUERIES
--==================================
+-- ==================================
+-- GRP TASK 1: 3 join QUERIES
+-- ==================================
 -- QUERY 1: Student enrolled in Course, taught by Faculty, in Classroom
 SELECT 
     s.name AS student_name,
@@ -264,9 +265,9 @@ FROM Faculty f
 JOIN Courses c ON f.faculty_id = c.faculty_id
 JOIN Classroom cl ON c.classroom_id = cl.classroom_id;
 
--===============================
---GRP TASK: Aggregated query
--===============================
+-- ===============================
+-- GRP TASK: Aggregated query
+-- ===============================
 -- QUERY :Aggregated  query
 SELECT
     c.course_name,
