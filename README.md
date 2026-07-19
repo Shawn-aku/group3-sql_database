@@ -7,8 +7,8 @@ Shawn  , question 1 --> creating Table A: "Students" and  its content
 Beryl, question 2  --> creating Table B : "Classroom" and its content
 Desire de Dieu, question4 --> creating table D:  "Courses" and its content
 Mireille, question 3  --> creating Table C : "Faculty" and its contents
-Daniella question 5  --> Creating the student-courses table, 3 join quer and aggregated query
-Belin question 5  --> Creating the student-activites table and its content
+Daniella, question 5  --> Creating the student-courses table, 3 join quer and aggregated query
+Belin, question 5  --> Creating the student-activites table and its content
 Kelvin, question 5  --> creating Table E: "Extracurricular-activities" and its content
 
 ## Overview
