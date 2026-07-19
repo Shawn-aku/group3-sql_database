@@ -1,3 +1,4 @@
+
 CREATE DATABASE ALU_GP3_DATABASE;
 USE ALU_GP3_DATABASE;
 -- ================================
@@ -138,21 +139,6 @@ SELECT *
 FROM Classroom
 WHERE capacity > 30;
 
--- Update member c 
--- 1.update statement
-UPDATE Faculty
-SET department = 'Software Engineering'
-WHERE faculty_id = 1;
-
--- 2. DELETE statement
-DELETE FROM Faculty
-WHERE faculty_id = 5;
-
--- 3. SELECT statement
-SELECT *
-FROM Faculty
-WHERE department = 'Mathematics';
-
 -- Update member D
 -- 1. UPDATE
 UPDATE Courses
@@ -167,6 +153,21 @@ WHERE course_id = 5;
 SELECT *
 FROM Courses
 WHERE credits >= 4;
+
+-- Update member c 
+-- 1.update statement
+UPDATE Faculty
+SET department = 'Software Engineering'
+WHERE faculty_id = 1;
+
+-- 2. DELETE statement
+DELETE FROM Faculty
+WHERE faculty_id = 5;
+
+-- 3. SELECT statement
+SELECT *
+FROM Faculty
+WHERE department = 'Mathematics';
 
 -- Update member E
 -- 1.UPDATE statement
@@ -223,12 +224,12 @@ VALUES
 (4, 4, '2026-02-04', 'Treasurer'),
 (1, 2, '2026-02-05', 'Member');
 -- insert in courses
-INSERT INTO Student_Courses (student_id, course_id, enrollment_date) VALUES
-(1, 1, '2025-09-01'),
-(1, 2, '2025-09-01'),
-(2, 1, '2025-09-02'),
-(3, 3, '2025-09-01'),
-(4, 2, '2025-09-03');
+INSERT INTO Student_Courses (student_id, course_id) VALUES
+(1, 1),
+(1, 2),
+(2, 1),
+(3, 3),
+(4, 2);
 
 -- ==================================
 -- GRP TASK 1: 3 join QUERIES
@@ -276,3 +277,6 @@ FROM Courses c
 LEFT JOIN Student_Courses sc ON c.course_id = sc.course_id
 GROUP BY c.course_id, c.course_name
 ORDER BY total_students DESC;
+
+-- Normalization check (short paragraph)
+-- Our schema is normalized to at least 3NF. Each table stores attributes that depend only on that table's own primary key — for example, Courses stores cou-- rse-specific data and only references "faculty_id/classroom_id" rather than repeating faculty or classroom details inline. We avoid many-to-many duplicat-- ion by using junction tables: Student_Courses and Student_Activities each hold only the foreign keys (plus relationship-specific attributes like join_dat-- e and role) needed to represent the relationship, rather than duplicating student or course data. No table repeats data that belongs elsewhere — e.g., facu-- lty names/emails live only in Faculty, not copied into Courses or Extra_Curricular_Activities.
